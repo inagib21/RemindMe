@@ -1,6 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ClerkProvider } from '@clerk/nextjs'
+import { Separator } from '@/components/ui/separator'
+import NavBar from '@/components/Navbar'
+import { ThemeProvider } from '@/providers/ThemeProvider'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,8 +20,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <ClerkProvider>
+    <html lang="en"  className={cn(inter.className, "dark")} style={{
+      colorScheme: "dark",
+    }}>
+      <body>
+        <ThemeProvider>
+          <div className =  "flex min-h-scree w-full flex-col items-center dark:bg-black">
+            <NavBar />
+            <Separator/>
+            <main className='flex flex-grow w-full justify-center items-center dark:bg-neutral-950'>{children}</main>
+            </div>
+        </ThemeProvider>
+        </body>
     </html>
+    </ClerkProvider>
   )
 }
