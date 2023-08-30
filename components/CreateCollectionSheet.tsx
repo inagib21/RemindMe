@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Sheet,
@@ -7,10 +8,7 @@ import {
   SheetTitle,
 } from "./ui/sheet";
 import { useForm } from "react-hook-form";
-import {
-  createCollectionSchema,
-  createCollectionSchemaType,
-} from "@/schema/createCollection";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -33,10 +31,14 @@ import { CollectionColor, CollectionColors } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { createCollection } from "@/actions/collection";
+
 import { toast } from "./ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
+
+import { createCollection } from "@/actions/collection";
+import { createCollectionSchema, createCollectionSchemaType } from "@/schema/CreateCollection";
+
 
 interface Props {
   open: boolean;
@@ -110,7 +112,7 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
 
             <FormField
               control={form.control}
-              name="color"
+              name="colors"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Color</FormLabel>
@@ -158,8 +160,8 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
             disabled={form.formState.isSubmitting}
             variant={"outline"}
             className={cn(
-              form.watch("color") &&
-                CollectionColors[form.getValues("color") as CollectionColor]
+              form.watch("colors") &&
+                CollectionColors[form.getValues("colors") as CollectionColor]
             )}
             onClick={form.handleSubmit(onSubmit)}
           >

@@ -1,3 +1,4 @@
+"use client"
 import React, { ReactNode } from 'react'
 
 function layout( {children}: {children:ReactNode} ) {

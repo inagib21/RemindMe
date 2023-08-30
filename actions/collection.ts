@@ -1,7 +1,8 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { wait } from "@/lib/wait";
-import { createCollectionSchemaType } from "@/schema/createCollection";
+import { createCollectionSchemaType } from "@/schema/CreateCollection";
+;
 import { currentUser } from "@clerk/nextjs";
 
 export async function createCollection(form: createCollectionSchemaType){
@@ -14,7 +15,7 @@ export async function createCollection(form: createCollectionSchemaType){
     return await prisma.collection.create({
         data: {
             userId: user.id,
-            color: form.color,
+            color: form.colors,
             name: form.name
         }
     })
